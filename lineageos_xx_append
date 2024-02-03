@@ -1,26 +1,3 @@
-#
-# Copyright (C) 2023 The LineageOS Project
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
-# General Setup
-CONFIG_LOCALVERSION_AUTO=y
-
-# Input Device Drivers
-CONFIG_INPUT_FINGERPRINT=y
-
-# LED driver for blink(1) USB RGB LED is under Special HID drivers (HID_THINGM)
-CONFIG_LEDS_AW2013=y
-CONFIG_LEDS_AW2023=y
-
-# Qualcomm Technologies, Inc. MSM Camera And Video
-CONFIG_MSMB_CAMERA_LEGACY=y
-
-# RCU Subsystem
-CONFIG_INITRAMFS_IGNORE_SKIP_FLAG=y
-
-# for inline builds
 # APPEND ME
 #########################
 CONFIG_LOCALVERSION="-perf/ˣˣ⁺"
