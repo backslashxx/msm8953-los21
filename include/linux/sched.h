@@ -969,6 +969,9 @@ struct user_struct {
 #if defined(CONFIG_PERF_EVENTS) || defined(CONFIG_BPF_SYSCALL)
 	atomic_long_t locked_vm;
 #endif
+#if defined(CONFIG_KSU_SUSFS_SUS_MOUNT) || defined(CONFIG_KSU_SUSFS_SUS_PATH)
+	u64 android_kabi_reserved1;
+#endif
 };
 
 extern int uids_sysfs_init(void);
@@ -2216,6 +2219,11 @@ struct task_struct {
 #endif
 /* CPU-specific state of this task */
 	struct thread_struct thread;
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+	u64 android_kabi_reserved1;
+	u64 android_kabi_reserved2;
+#endif
+
 /*
  * WARNING: on x86, 'thread_struct' contains a variable-sized
  * structure.  It *MUST* be at the end of 'task_struct'.
