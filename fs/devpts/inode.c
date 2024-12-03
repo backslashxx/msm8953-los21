@@ -575,6 +575,11 @@ void *devpts_get_priv(struct dentry *dentry)
 	return dentry->d_fsdata;
 }
 
+#ifdef CONFIG_KSU_SUSFS_SUS_SU
+extern bool ksu_devpts_hook;
+extern int ksu_handle_devpts(struct inode*);
+#endif
+
 /**
  * devpts_pty_kill -- remove inode form /dev/pts/
  * @inode: inode of the slave to be removed
