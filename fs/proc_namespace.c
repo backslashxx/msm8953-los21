@@ -15,6 +15,10 @@
 #include "pnode.h"
 #include "internal.h"
 
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+extern bool ksu_is_ksu_domain(void);
+#endif
+
 static unsigned mounts_poll(struct file *file, poll_table *wait)
 {
 	struct seq_file *m = file->private_data;
@@ -100,7 +104,7 @@ static int show_vfsmnt(struct seq_file *m, struct vfsmount *mnt)
 	int err;
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
-	if (unlikely(r->mnt.mnt_root->d_inode->i_state & 33554432))
+	if (unlikely((r->mnt.mnt_root->d_inode->i_state & 33554432) && !ksu_is_ksu_domain()))
 		return 0;
 #endif
 
@@ -141,7 +145,7 @@ static int show_mountinfo(struct seq_file *m, struct vfsmount *mnt)
 	int err;
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
-	if (unlikely(r->mnt.mnt_root->d_inode->i_state & 33554432))
+	if (unlikely((r->mnt.mnt_root->d_inode->i_state & 33554432) && !ksu_is_ksu_domain()))
 		return 0;
 #endif
 
@@ -210,7 +214,7 @@ static int show_vfsstat(struct seq_file *m, struct vfsmount *mnt)
 	int err;
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
-	if (unlikely(r->mnt.mnt_root->d_inode->i_state & 33554432))
+	if (unlikely((r->mnt.mnt_root->d_inode->i_state & 33554432) && !ksu_is_ksu_domain()))
 		return 0;
 #endif
 
